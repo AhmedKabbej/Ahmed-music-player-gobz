@@ -1,3 +1,5 @@
+import './style.css';
+
 class MusicPlayer {
   // Explication : Le constructeur est la première fonction lancée quand la Classe est instanciée. On y initialise les propriété, et appelle des fonctions.
   constructor() {
@@ -6,8 +8,11 @@ class MusicPlayer {
     // Pense bien à mettre tes images dans le dossier "public"
     this.tracks = [
       { id: 1, title: "The Strokes Someday", url: "The Strokes_Someday.mp3" },
-      { id: 2, title: "Bob Marley Is This Love", url: "Bob Marley_IsThisLove.mp3" },
-      {id: 3, title: "Pharrell Williams Happy", url: "Pharrell_Williams_Happy.mp3"}
+      { id: 2, title: "Toploader Dancing in the Moonlight", url: "Toploader - Dancing in the Moonlight.mp3" },
+      { id: 3, title: "LP Other People", url: "LP - Other People.mp3" },
+      { id: 4, title: "Harry Styles Sign of the Times", url: "Harry Styles - Sign of the Times.mp3" },
+      {id: 5, title: "Pharrell Williams Happy", url: "Pharrell Williams-Happy.mp3"},
+      { id: 6, title: "Stromae merci", url: "Stromae - merci.mp3" }
     ];
     this.currentTrackIndex = 0; // Bug: En général, les tableaux commencent à 0
     this.audio = new Audio();
@@ -87,7 +92,17 @@ prevTrack() {
   this.audio.play();
   this.isPlaying = true;
 }
+
+
 }
+
+
+function classToggle() {
+  var el = document.querySelector('.icon-cards__content');
+  el.classList.toggle('step-animation');
+}
+
+document.querySelector('#toggle-animation').addEventListener('click', classToggle);
 
 new MusicPlayer();
 
