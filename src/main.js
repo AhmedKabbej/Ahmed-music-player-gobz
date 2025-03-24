@@ -1,4 +1,5 @@
-import './style.css';
+// import './style.css';
+
 
 class MusicPlayer {
   // Explication : Le constructeur est la première fonction lancée quand la Classe est instanciée. On y initialise les propriété, et appelle des fonctions.
@@ -93,16 +94,17 @@ prevTrack() {
   this.isPlaying = true;
 }
 
-
-}
-
-
-function classToggle() {
+classToggle() {
   var el = document.querySelector('.icon-cards__content');
   el.classList.toggle('step-animation');
+  document.querySelector('#toggle-animation').addEventListener('click', classToggle);
+}
 }
 
-document.querySelector('#toggle-animation').addEventListener('click', classToggle);
+
+
+
+
 
 new MusicPlayer();
 
