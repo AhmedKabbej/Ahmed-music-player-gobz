@@ -27,8 +27,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  width: 60vw;
-  height: 40vw;
+  width: 20vw;
+  height: 20vw;
   max-width: 380px;
   max-height: 250px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -41,24 +41,44 @@
 }
 .icon-cards__item:nth-child(2) {
   background: #F87949;
-  transform: rotateY(120deg) translateZ(35vw);
+  transform: rotateY(60deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(3) {
   background: #FBAB48;
+  transform: rotateY(120deg) translateZ(35vw);
+}
+.icon-cards__item:nth-child(4) {
+  background: #F87949;
+  transform: rotateY(180deg) translateZ(35vw);
+}
+.icon-cards__item:nth-child(5) {
+  background: #FBAB48;
   transform: rotateY(240deg) translateZ(35vw);
 }
-
+.icon-cards__item:nth-child(6) {
+  background: #F87949;
+  transform: rotateY(300deg) translateZ(35vw);
+}
 @keyframes carousel {
-  0%, 17.5% {
+  0%, 15% {
     transform: translateZ(-35vw) rotateY(0);
   }
-  27.5%, 45% {
+  30%, 35% {
+    transform: translateZ(-35vw) rotateY(-60deg);
+  }
+  45%, 50% {
     transform: translateZ(-35vw) rotateY(-120deg);
   }
-  55%, 72.5% {
+  60%, 65% {
+    transform: translateZ(-35vw) rotateY(-180deg);
+  }
+  75%, 80% {
     transform: translateZ(-35vw) rotateY(-240deg);
   }
-  82.5%, 100% {
+  90%, 95% {
+    transform: translateZ(-35vw) rotateY(-300deg);
+  }
+  98%, 100% {
     transform: translateZ(-35vw) rotateY(-360deg);
   }
 }

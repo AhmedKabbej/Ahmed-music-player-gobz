@@ -1,0 +1,65 @@
+h1,h2{
+    color: #fff0df;
+}
+p{
+    color: #fff0df;
+}
+
+.button-32 {
+  background-color: #fff0df;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.gapgutton{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+}
+
+
+.button-32:not(:disabled):hover,
+.button-32:not(:disabled):focus {
+  outline: 0;
+  background: #af987e;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.button-32:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+body {
+  margin: 3% 10% 0 10%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+#quote {
+  font-size: clamp(2rem, 10rem, 5vw);
+  color: #dfdcff;
+  text-align: center;
+  line-height: 1.2
+}
+
+button {
+  padding: 10px;
+  margin: 20px 0;
+}

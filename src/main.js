@@ -1,20 +1,25 @@
-// import './style.css';
-
-
 class MusicPlayer {
   // Explication : Le constructeur est la première fonction lancée quand la Classe est instanciée. On y initialise les propriété, et appelle des fonctions.
   constructor() {
     // BUG : tracks est un tableau d'objets. Chaque objet représente une musique et ses proprités. Un des items du tableau n'est pas un objet.
     // TODO DRAGGABLE : On va vouloir ajouter une propriété "img" à chaque objet, et y inscrire le lien de l'image que l'on veut charger. 
     // Pense bien à mettre tes images dans le dossier "public"
-    this.tracks = [
-      { id: 1, title: "The Strokes Someday", url: "The Strokes_Someday.mp3" },
-      { id: 2, title: "Toploader Dancing in the Moonlight", url: "Toploader - Dancing in the Moonlight.mp3" },
-      { id: 3, title: "LP Other People", url: "LP - Other People.mp3" },
-      { id: 4, title: "Harry Styles Sign of the Times", url: "Harry Styles - Sign of the Times.mp3" },
-      {id: 5, title: "Pharrell Williams Happy", url: "Pharrell Williams-Happy.mp3"},
-      { id: 6, title: "Stromae merci", url: "Stromae - merci.mp3" }
-    ];
+    
+
+    //boucle for each
+
+    forEach(tracks => {
+      this.tracks = [
+        { id: 1, title: "The Strokes Someday", url: "The Strokes_Someday.mp3" },
+        { id: 2, title: "Toploader Dancing in the Moonlight", url: "Toploader - Dancing in the Moonlight.mp3" },
+        { id: 3, title: "LP Other People", url: "LP - Other People.mp3" },
+        { id: 4, title: "Harry Styles Sign of the Times", url: "Harry Styles - Sign of the Times.mp3" },
+        {id: 5, title: "Pharrell Williams Happy", url: "Pharrell Williams-Happy.mp3"},
+        { id: 6, title: "Stromae merci", url: "Stromae - merci.mp3" }
+      ];
+      
+    });
+    
     this.currentTrackIndex = 0; // Bug: En général, les tableaux commencent à 0
     this.audio = new Audio();
     this.isPlaying = false;
@@ -85,6 +90,11 @@ nextTrack() {
   this.loadTrack();
   this.audio.play(); // Bug: joue même si l'audio n'est pas chargé correctement
   this.isPlaying = 'true'; // Bug : Ici, on veut passer isPlaying a true, mais on est en train de lui passer une chaine de caractère, et pas un boolean. Donc ça ne marche pas
+  this.ChangerTrack;
+
+  document.getElementById("animate").onclick = function () {
+    tl.restart();
+  };
 }
 
 prevTrack() {
@@ -92,13 +102,22 @@ prevTrack() {
   this.loadTrack();
   this.audio.play();
   this.isPlaying = true;
+  this.ChangerTrack;
+
+
+document.getElementById("animate").onclick = function () {
+  tl.restart();
+};
 }
 
-classToggle() {
-  var el = document.querySelector('.icon-cards__content');
-  el.classList.toggle('step-animation');
-  document.querySelector('#toggle-animation').addEventListener('click', classToggle);
+ChangerTrack(){
+  const pas = (360 / this.track.length);
+  pas * this.currentTrack;
+  const container = document.querySelector(".icon-cards__item d-flex align-items-center justify-content-center");
+  container.style.transform = `transform: rotateY(60deg) translateZ(35vw);(${this.tracks.length})`
 }
+
+//fonction au click applique a lelement contenair valeur transform
 }
 
 
@@ -140,6 +159,7 @@ new MusicPlayer();
 
 // De même, on va utiliser le Plugin Split Text (normalement payant) de GSAP.
 // Tu peux trouver le fichier à utiliser ici : https://codepen.io/GreenSock/full/OPqpRJ/
+
 
 
 // De même, on va créer une fonction à appeler dans le constructeur pour "Split" tous nos titres en petits lignes, mots, ou caractères. Nomme la comme tu veux.
