@@ -1,3 +1,4 @@
+
 .icon-cards {
   position: relative;
   width: 60vw;
@@ -16,18 +17,21 @@
   transform-origin: center;
   transform-style: preserve-3d;
   transform: translateZ(-30vw) rotateY(0);
-  animation: carousel 10s infinite cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  transition:all 1.3s ease;
+
+  /* animation: carousel 10s infinite cubic-bezier(0.77, 0, 0.175, 1) forwards; */
 }
-.icon-cards__content.step-animation {
+/* .icon-cards__content.step-animation {
   animation: carousel 8s infinite steps(1) forwards;
-}
+} */
 .icon-cards__item {
+  
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 20vw;
+  width: 16vw;
   height: 20vw;
   max-width: 380px;
   max-height: 250px;
@@ -36,27 +40,27 @@
   transform-origin: center;
 }
 .icon-cards__item:nth-child(1) {
-  background: #FDD94F;
+  background: #fff0df;
   transform: rotateY(0) translateZ(35vw);
 }
 .icon-cards__item:nth-child(2) {
-  background: #F87949;
+  background: #fff0df;
   transform: rotateY(60deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(3) {
-  background: #FBAB48;
+  background: #fff0df;
   transform: rotateY(120deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(4) {
-  background: #F87949;
+  background: #fff0df;
   transform: rotateY(180deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(5) {
-  background: #FBAB48;
+  background: #fff0df;
   transform: rotateY(240deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(6) {
-  background: #F87949;
+  background: #fff0df;
   transform: rotateY(300deg) translateZ(35vw);
 }
 @keyframes carousel {
@@ -85,15 +89,10 @@
 html,
 body {
   height: 100%;
+  background-color: #181818;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #110F15;
-}
+
 
 .checkbox {
   position: relative;

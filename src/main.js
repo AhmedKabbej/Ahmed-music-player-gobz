@@ -7,16 +7,17 @@ class MusicPlayer {
     
 
     //boucle for each
+    this.tracks = [
+      { id: 1, title: "The Strokes Someday", url: "The Strokes_Someday.mp3" },
+      { id: 2, title: "Toploader Dancing in the Moonlight", url: "Toploader - Dancing in the Moonlight.mp3" },
+      { id: 3, title: "LP Other People", url: "LP - Other People.mp3" },
+      { id: 4, title: "Harry Styles Sign of the Times", url: "Harry Styles - Sign of the Times.mp3" },
+      {id: 5, title: "Pharrell Williams Happy", url: "Pharrell Williams-Happy.mp3"},
+      { id: 6, title: "Stromae merci", url: "Stromae - merci.mp3" }
+    ];
+ 
+  this.tracks.forEach(track => {
 
-    forEach(tracks => {
-      this.tracks = [
-        { id: 1, title: "The Strokes Someday", url: "The Strokes_Someday.mp3" },
-        { id: 2, title: "Toploader Dancing in the Moonlight", url: "Toploader - Dancing in the Moonlight.mp3" },
-        { id: 3, title: "LP Other People", url: "LP - Other People.mp3" },
-        { id: 4, title: "Harry Styles Sign of the Times", url: "Harry Styles - Sign of the Times.mp3" },
-        {id: 5, title: "Pharrell Williams Happy", url: "Pharrell Williams-Happy.mp3"},
-        { id: 6, title: "Stromae merci", url: "Stromae - merci.mp3" }
-      ];
       
     });
     
@@ -90,31 +91,28 @@ nextTrack() {
   this.loadTrack();
   this.audio.play(); // Bug: joue même si l'audio n'est pas chargé correctement
   this.isPlaying = 'true'; // Bug : Ici, on veut passer isPlaying a true, mais on est en train de lui passer une chaine de caractère, et pas un boolean. Donc ça ne marche pas
-  this.ChangerTrack;
+  this.changerTrack();
 
-  document.getElementById("animate").onclick = function () {
-    tl.restart();
   };
-}
+
 
 prevTrack() {
   this.currentTrackIndex = (this.currentTrackIndex - 1 + this.tracks.length) % this.tracks.length;
   this.loadTrack();
   this.audio.play();
   this.isPlaying = true;
-  this.ChangerTrack;
+  this.changerTrack();
 
 
-document.getElementById("animate").onclick = function () {
-  tl.restart();
 };
-}
 
-ChangerTrack(){
-  const pas = (360 / this.track.length);
-  pas * this.currentTrack;
-  const container = document.querySelector(".icon-cards__item d-flex align-items-center justify-content-center");
-  container.style.transform = `transform: rotateY(60deg) translateZ(35vw);(${this.tracks.length})`
+
+changerTrack(){
+  this.pas = (360 / this.tracks.length);
+  const currentPas = this.pas * this.currentTrackIndex;
+  const container = document.querySelector(".icon-cards__content");
+  container.style.transform = `translateZ(-30vw) rotateY(${currentPas}deg) `
+  //console.log(`transform: rotateY(${currentPas}deg) translateZ(35vw)`)
 }
 
 //fonction au click applique a lelement contenair valeur transform
