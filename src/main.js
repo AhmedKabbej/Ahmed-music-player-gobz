@@ -1,3 +1,9 @@
+import gsap from "gsap";
+import { SplitText } from "gsap-trial/SplitText";
+import { Draggable } from "gsap/Draggable";
+gsap.registerPlugin(SplitText,Draggable);
+
+
 class MusicPlayer {
   // Explication : Le constructeur est la première fonction lancée quand la Classe est instanciée. On y initialise les propriété, et appelle des fonctions.
   constructor() {
@@ -37,8 +43,9 @@ class MusicPlayer {
 init() {
   this.cacheDOM();
   this.bindEvents();
- 
   this.loadTrack();
+  this.handleSplitTrack();
+  this.setupDraggable();
 }
 
 // Bug: Regarde aussi la façon dont on déclare les variables/membres de classe. Rappelle toi que les "const" sont limité à leur portée de bloc (donc ici, à la fonction).
@@ -76,16 +83,9 @@ this.trackTitle.textContent = this.tracks[this.currentTrackIndex].title;
 }
 // fonction pour split text a partir du H2
 handleSplitTrack(){
-  // var split = new SplitText("#splitH2",{type: "chars"});
 
-  // gsap.from(split.chars,{
-  //   duration: 1,
-  //   y: 100,
-  // });
-
-  gsap.registerPlugin(SplitText) 
-  var typeSplit = new SplitType('[splitH2]', {types: 'lines, words, chars',tagName: 'span'})
-  gsap.from('[splitH2] .char', {
+  var typeSplit = new SplitText('#track-title', {types: 'chars', tagName: 'span'})
+  gsap.from(typeSplit.chars, {
     y: '110%',
     opacity: 1,
     rotationZ: '10',
@@ -126,7 +126,12 @@ prevTrack() {
 
 
 };
-
+setupDraggable(){
+  Draggable.create(".icon-cards__content", {
+    type:"rotation",
+    startX : 20
+  });
+}
 
 changerTrack(){
   this.pas = (360 / this.tracks.length);
@@ -134,6 +139,7 @@ changerTrack(){
   const container = document.querySelector(".icon-cards__content");
   container.style.transform = `translateZ(-30vw) rotateY(${currentPas}deg) `
   //console.log(`transform: rotateY(${currentPas}deg) translateZ(35vw)`)
+ this.handleSplitTrack();
 }
 
 //fonction au click applique a lelement contenair valeur transform
