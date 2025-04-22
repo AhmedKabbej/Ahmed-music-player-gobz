@@ -1,4 +1,6 @@
-
+.img{
+  border-radius: 35px;
+}    
 .icon-cards {
   position: relative;
   width: 60vw;
