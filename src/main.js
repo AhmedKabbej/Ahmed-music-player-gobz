@@ -74,6 +74,27 @@ this.audio.src = this.tracks[this.currentTrackIndex].url;
 this.trackTitle.textContent = this.tracks[this.currentTrackIndex].title;
 // this.animateTitle();
 }
+// fonction pour split text a partir du H2
+handleSplitTrack(){
+  // var split = new SplitText("#splitH2",{type: "chars"});
+
+  // gsap.from(split.chars,{
+  //   duration: 1,
+  //   y: 100,
+  // });
+
+  gsap.registerPlugin(SplitText) 
+  var typeSplit = new SplitType('[splitH2]', {types: 'lines, words, chars',tagName: 'span'})
+  gsap.from('[splitH2] .char', {
+    y: '110%',
+    opacity: 1,
+    rotationZ: '10',
+    duration: 0.5,
+    ease: 'power1.out',
+    stagger: 0.1,
+  })
+  
+}
 
 togglePlay() {
   if (this.isPlaying) { // BUG : La référence de isPlaying semble ne pas fonctionner, c'est un membre de classe, il faut un mot clef pour pointer dessus.

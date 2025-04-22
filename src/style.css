@@ -1,6 +1,12 @@
-.img{
-  border-radius: 35px;
-}    
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+
+img{
+    border-radius:7px;
+  } 
+  h1,h2{ 
+    font-family: "Special Gothic Expanded One", sans-serif;
+  font-style: normal;}
 .icon-cards {
   position: relative;
   width: 60vw;
@@ -39,33 +45,33 @@
   max-height: 250px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
-  transform-origin: center;
+  perspective-origin: center;
 }
 .icon-cards__item:nth-child(1) {
-  background: #fff0df;
+  /* background: #fff0df; */
   transform: rotateY(0) translateZ(35vw);
 }
 .icon-cards__item:nth-child(2) {
-  background: #fff0df;
+  /* background: #fff0df; */
   transform: rotateY(60deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(3) {
-  background: #fff0df;
+  /* background: #fff0df; */
   transform: rotateY(120deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(4) {
-  background: #fff0df;
+  /* background: #fff0df; */
   transform: rotateY(180deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(5) {
-  background: #fff0df;
+  /* background: #fff0df; */
   transform: rotateY(240deg) translateZ(35vw);
 }
 .icon-cards__item:nth-child(6) {
-  background: #fff0df;
+  /* background: #fff0df; */
   transform: rotateY(300deg) translateZ(35vw);
 }
-@keyframes carousel {
+/* @keyframes carousel {
   0%, 15% {
     transform: translateZ(-35vw) rotateY(0);
   }
@@ -87,7 +93,7 @@
   98%, 100% {
     transform: translateZ(-35vw) rotateY(-360deg);
   }
-}
+} */
 html,
 body {
   height: 100%;

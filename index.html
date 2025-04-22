@@ -7,6 +7,8 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/src/button.css">
     <link rel="stylesheet" href="/src/style.css">
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     
 </head>
 <body>
@@ -23,14 +25,32 @@
 
     <figure class="icon-cards mt-3">
         <div class="icon-cards__content">
-          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span class="h1"><img src="public/Thestrokescover.jpg" alt="" width="250px"></span></div>
-          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span class="h1"><img src="public/StromaeCover.jpg" alt="" width="250px"></span></div>
-          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span class="h1"><img src="public/Pharrellwilliamscover.jpg" alt="" width="250px"></span></div>
-          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span class="h1"><img src="public/Harrystylecover.jpg" alt="" width="250px"></span></div>
-          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span class="h1"><img src="public/LPcover.jpg" alt="" width="250px"></span></div>
-          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span class="h1"><img src="public/Toploadercover.jpg" alt="" width="250px"></span></div>
+          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span id="splitH2" class="h1"><img src="public/Thestrokescover.jpg" alt="" width="250px"></span></div>
+          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span id="splitH2" class="h1"><img src="public/StromaeCover.jpg" alt="" width="250px"></span></div>
+          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span id="splitH2" class="h1"><img src="public/Pharrellwilliamscover.jpg" alt="" width="250px"></span></div>
+          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span id="splitH2" class="h1"><img src="public/Harrystylecover.jpg" alt="" width="250px"></span></div>
+          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span id="splitH2" class="h1"><img src="public/LPcover.jpg" alt="" width="250px"></span></div>
+          <div class="icon-cards__item d-flex align-items-center justify-content-center"><span id="splitH2" class="h1"><img src="public/Toploadercover.jpg" alt="" width="250px"></span></div>
         </div>
       </figure>
+
+     
+<script>
+let typeSplit = new SplitType('[splitH2]', {
+  types: 'lines, words, chars',
+  tagName: 'span'
+})
+
+gsap.from('[splitH2] .char', {
+  y: '110%',
+  opacity: 1,
+  rotationZ: '10',
+  duration: 0.5,
+  ease: 'power1.out',
+  stagger: 0.1,
+  
+})
+</script>
       
       <!-- <div class="checkbox">
         <input class="d-none" id="toggle-animation" type="checkbox" checked />
