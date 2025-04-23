@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { SplitText } from "gsap-trial/SplitText";
 import { Draggable } from "gsap/Draggable";
-gsap.registerPlugin(SplitText,Draggable);
+gsap.registerPlugin(SplitText, Draggable);
 
 
 class MusicPlayer {
@@ -10,7 +10,7 @@ class MusicPlayer {
     // BUG : tracks est un tableau d'objets. Chaque objet représente une musique et ses proprités. Un des items du tableau n'est pas un objet.
     // TODO DRAGGABLE : On va vouloir ajouter une propriété "img" à chaque objet, et y inscrire le lien de l'image que l'on veut charger. 
     // Pense bien à mettre tes images dans le dossier "public"
-    
+
 
     //boucle for each
     this.tracks = [
@@ -18,131 +18,165 @@ class MusicPlayer {
       { id: 2, title: "Toploader Dancing in the Moonlight", url: "Toploader - Dancing in the Moonlight.mp3" },
       { id: 3, title: "LP Other People", url: "LP - Other People.mp3" },
       { id: 4, title: "Harry Styles Sign of the Times", url: "Harry Styles - Sign of the Times.mp3" },
-      {id: 5, title: "Pharrell Williams Happy", url: "Pharrell Williams-Happy.mp3"},
+      { id: 5, title: "Pharrell Williams Happy", url: "Pharrell Williams-Happy.mp3" },
       { id: 6, title: "Stromae merci", url: "Stromae - merci.mp3" }
     ];
- 
-  this.tracks.forEach(track => {
 
-      
+    this.tracks.forEach(track => {
+
+
     });
-    
+
     this.currentTrackIndex = 0; // Bug: En général, les tableaux commencent à 0
     this.audio = new Audio();
     this.isPlaying = false;
     this.volume = 1.2; // BUG: C'est trop fort 
-     // BUG : Cette fonction n'est pas appelé dans le constructeur
-     this.init();
-     
+    // BUG : Cette fonction n'est pas appelé dans le constructeur
+    this.init();
+
   }
-   
 
 
-// Explication : Ici, on est en dehors du constructor, on y défini toutes les fonctions que la classe possède.
 
-init() {
-  this.cacheDOM();
-  this.bindEvents();
-  this.loadTrack();
-  this.handleSplitTrack();
-  this.setupDraggable();
-}
+  // Explication : Ici, on est en dehors du constructor, on y défini toutes les fonctions que la classe possède.
 
-// Bug: Regarde aussi la façon dont on déclare les variables/membres de classe. Rappelle toi que les "const" sont limité à leur portée de bloc (donc ici, à la fonction).
-// Alors que les membres de classes (this.truc) sont appelable n'importe ou dans la classe.
-cacheDOM() {
-
-  const playlist = document.querySelector("#playlist");
-  this.playButton = document.querySelector("#play");
-  this.nextButton = document.querySelector("#next");
-  this.prevButton = document.querySelector("#prev");
-  this.trackTitle = document.querySelector("#track-title");
-}
-
-// Bug: Il semble que dans cette définition de fonction, on attende un paramètre, pourtant on ne l'utilise nul part. Est il vraiment utile ?
-// Bug : Il semble que des events listeners soient mal appelés. nextButton par exemple, est un élement HTML déjà défini.
-// Bug : Quel est l'évènement que l'on veut utiliser sur prevButton ? wheel ? vraiment ?
-// Bug : Son callback est également mal écrit. Regarde au dessus et en dessous comment on déclenche les fonctions de Callback
-bindEvents(item) {
-  this.playButton.addEventListener("click", () => this.togglePlay());
-  this.nextButton.addEventListener("click", () => this.nextTrack()); // Bug: nextButton est undefined
-  this.prevButton.addEventListener("click", () => this.prevTrack());
-  this.audio.addEventListener("ended", () => this.nextTrack());
-}
-
-// Bug : Il manque des accolades pour décrire le corps de la fonction
-loadTrack(){
-  
-if (this.currentTrackIndex < 0 || this.currentTrackIndex >= this.tracks.length) {
-  console.error("Index de piste invalide");
-  return;
-}
-this.audio.src = this.tracks[this.currentTrackIndex].url;
-this.trackTitle.textContent = this.tracks[this.currentTrackIndex].title;
-// this.animateTitle();
-}
-// fonction pour split text a partir du H2
-handleSplitTrack(){
-
-  var typeSplit = new SplitText('#track-title', {types: 'chars', tagName: 'span'})
-  gsap.from(typeSplit.chars, {
-    y: '110%',
-    opacity: 1,
-    rotationZ: '10',
-    duration: 0.5,
-    ease: 'power1.out',
-    stagger: 0.1,
-  })
-  
-}
-
-togglePlay() {
-  if (this.isPlaying) { // BUG : La référence de isPlaying semble ne pas fonctionner, c'est un membre de classe, il faut un mot clef pour pointer dessus.
-    this.audio.pause();
-  } else {
-    this.audio.play().catch(err => console.error("Erreur de lecture :", err));
+  init() {
+    this.cacheDOM();
+    this.bindEvents();
+    this.loadTrack();
+    this.handleSplitTrack();
+    this.setupDraggable();
   }
-}
 
-// Challenge : les fonction Next et previous track ont sensiblement le même traitement. En code, on cherche toujours à ne pas dupliquer de la logique, mais plutôt à factoriser.
-// Peux tu créer une seule fonction à la place de deux ? Comment gérerais tu le cas à ce moment ?
+  // Bug: Regarde aussi la façon dont on déclare les variables/membres de classe. Rappelle toi que les "const" sont limité à leur portée de bloc (donc ici, à la fonction).
+  // Alors que les membres de classes (this.truc) sont appelable n'importe ou dans la classe.
+  cacheDOM() {
 
-nextTrack() {
-  this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
-  this.loadTrack();
-  this.audio.play(); // Bug: joue même si l'audio n'est pas chargé correctement
-  this.isPlaying = 'true'; // Bug : Ici, on veut passer isPlaying a true, mais on est en train de lui passer une chaine de caractère, et pas un boolean. Donc ça ne marche pas
-  this.changerTrack();
+    const playlist = document.querySelector("#playlist");
+    this.playButton = document.querySelector("#play");
+    this.nextButton = document.querySelector("#next");
+    this.prevButton = document.querySelector("#prev");
+    this.trackTitle = document.querySelector("#track-title");
+  }
 
+  // Bug: Il semble que dans cette définition de fonction, on attende un paramètre, pourtant on ne l'utilise nul part. Est il vraiment utile ?
+  // Bug : Il semble que des events listeners soient mal appelés. nextButton par exemple, est un élement HTML déjà défini.
+  // Bug : Quel est l'évènement que l'on veut utiliser sur prevButton ? wheel ? vraiment ?
+  // Bug : Son callback est également mal écrit. Regarde au dessus et en dessous comment on déclenche les fonctions de Callback
+  bindEvents(item) {
+    this.playButton.addEventListener("click", () => this.togglePlay());
+    this.nextButton.addEventListener("click", () => this.nextTrack()); // Bug: nextButton est undefined
+    this.prevButton.addEventListener("click", () => this.prevTrack());
+    this.audio.addEventListener("ended", () => this.nextTrack());
+  }
+
+  // Bug : Il manque des accolades pour décrire le corps de la fonction
+  loadTrack() {
+
+    if (this.currentTrackIndex < 0 || this.currentTrackIndex >= this.tracks.length) {
+      console.error("Index de piste invalide");
+      return;
+    }
+    this.audio.src = this.tracks[this.currentTrackIndex].url;
+    this.trackTitle.textContent = this.tracks[this.currentTrackIndex].title;
+    // this.animateTitle();
+  }
+
+  handleSplitTrack() {
+    // fonction pour split text a partir du H2
+    var splitParent = new SplitText('#track-title', { types: 'lines', linesClass: 'split-parent' })
+    var typeSplit = new SplitText('#track-title', { types: 'chars', tagName: 'span' })
+    gsap.from(typeSplit.chars, {
+      y: '110%',
+      opacity: 1,
+      rotationZ: '10',
+      duration: 0.5,
+      ease: 'power1.out',
+      stagger: 0.1,
+    })
+
+  }
+
+  togglePlay() {
+    if (this.isPlaying) { // BUG : La référence de isPlaying semble ne pas fonctionner, c'est un membre de classe, il faut un mot clef pour pointer dessus.
+      this.audio.pause();
+    } else {
+      this.audio.play().catch(err => console.error("Erreur de lecture :", err));
+    }
+  }
+
+  // Challenge : les fonction Next et previous track ont sensiblement le même traitement. En code, on cherche toujours à ne pas dupliquer de la logique, mais plutôt à factoriser.
+  // Peux tu créer une seule fonction à la place de deux ? Comment gérerais tu le cas à ce moment ?
+
+  nextTrack() {
+    this.currentTrackIndex = (this.currentTrackIndex + 1) % this.tracks.length;
+    this.loadTrack();
+    this.audio.play(); // Bug: joue même si l'audio n'est pas chargé correctement
+    this.isPlaying = 'true'; // Bug : Ici, on veut passer isPlaying a true, mais on est en train de lui passer une chaine de caractère, et pas un boolean. Donc ça ne marche pas
+    this.changerTrack();
   };
 
 
-prevTrack() {
-  this.currentTrackIndex = (this.currentTrackIndex - 1 + this.tracks.length) % this.tracks.length;
-  this.loadTrack();
-  this.audio.play();
-  this.isPlaying = true;
-  this.changerTrack();
+  prevTrack() {
+    this.currentTrackIndex = (this.currentTrackIndex - 1 + this.tracks.length) % this.tracks.length;
+    this.loadTrack();
+    this.audio.play();
+    this.isPlaying = true;
+    this.changerTrack();
 
 
-};
-setupDraggable(){
-  Draggable.create(".icon-cards__content", {
-    type:"rotation",
-    startX : 20
-  });
-}
+  };
+  setupDraggable() {
+    var proxy = document.createElement("div");
 
-changerTrack(){
-  this.pas = (360 / this.tracks.length);
-  const currentPas = this.pas * this.currentTrackIndex;
-  const container = document.querySelector(".icon-cards__content");
-  container.style.transform = `translateZ(-30vw) rotateY(${currentPas}deg) `
-  //console.log(`transform: rotateY(${currentPas}deg) translateZ(35vw)`)
- this.handleSplitTrack();
-}
+    this.drag = Draggable.create(proxy, {
+      trigger: ".icon-cards__content",
+      // force3D: false,
+      x: this.currentTrackIndex,
+      onDrag: this.updateSlider,
+      onDragEnd: this.snapSlider.bind(this)
+      // bounds: document.getElementById( "splitH2"),
+      // onDragEnd: this.updateSlider
+    });
+  }
+  updateSlider() {
+    gsap.set(".icon-cards__content", {
+      rotateY: this.x / 10
+    })
+  }
+  snapSlider() {
 
-//fonction au click applique a lelement contenair valeur transform
+    const isPositive = this.drag[0].startX - this.drag[0].x > 0;
+    if (isPositive) {
+      this.prevTrack()
+    } else {
+      this.nextTrack()
+
+    }
+    // gsap.to(".icon-cards__content", {
+    //   x: -this.currentIndex * slideWidth,
+    //   duration: 0.5,
+    //   ease: "power3.out"
+    // })
+  }
+
+  changerTrack() {
+    this.pas = (360 / this.tracks.length);
+    const currentPas = this.pas * this.currentTrackIndex;
+
+    console.log(this.drag[0].target)
+    gsap.to(".icon-cards__content", {
+      transform: `translateZ(-30vw) rotateY(${currentPas}deg) `,
+      duration: 1
+    })
+
+    // gsap.set(this.drag[0].target, {x:100, y:100, onUpdate:draggable[0].update, onUpdateScope:draggable[0]});
+
+    //console.log(`transform: rotateY(${currentPas}deg) translateZ(35vw)`)
+    this.handleSplitTrack();
+  }
+
+  //fonction au click applique a lelement contenair valeur transform
 }
 
 
